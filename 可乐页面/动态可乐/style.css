@@ -1,0 +1,147 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* 径向渐变 */
+    background: radial-gradient(#f7efef, #9a9e98);
+}
+
+.main {
+    height: calc(100vh);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* 换行 -- 容器不够自动换行 */
+    flex-wrap: wrap;
+}
+
+.content {
+    position: relative;
+    width: 600px;
+    height: 350px;
+}
+
+.content .circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.content .circle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    /* 裁剪路径 --  circle -- 裁剪为一个半径为120px 位于元素中心的圆*/
+    clip-path: circle(120px at center);
+    transition: .5s;
+    border-radius: 20px;
+}
+
+.content:hover .circle::before {
+    clip-path: circle(400px at center);
+    background: #0065c3;
+}
+
+.content:nth-child(2):hover .circle::before {
+    background: rgba(0, 0, 0, .939);
+}
+
+.content img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 300px;
+    /* 不对指针事件做出反应 -- 指针事件 -- hover等 */
+    pointer-events: none;
+    transition: .5s;
+}
+
+.content:hover img {
+    left: 72%;
+    height: 500px;
+}
+
+.content .introdece {
+    position: relative;
+    width: 50%;
+    padding: 20px 20px 20px 40px;
+    transition: .5s;
+    /*判断元素是否可见 --  不可见的元素也会占据页面上的空间 */
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.content:hover .introdece {
+    visibility: visible;
+    left: 0;
+    opacity: 1;
+}
+
+.content .introdece h2 {
+    color: white;
+    /* text-transform 属性控制文本的大小写 uppercase -- 仅有大写字母*/
+    text-transform: uppercase;
+    font-size: 2em;
+    line-height: 1em;
+    margin-bottom: 7px;
+}
+
+.content .introdece p {
+    color: white;
+}
+
+.introdece a {
+    position: relative;
+    color: black;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* 最大宽度为991px时的样式 */
+@media (max-width:991px) {
+    .content {
+        width: auto;
+        max-width: 350px;
+        align-items: flex-start;
+        margin: 13px;
+    }
+
+    .content:hover {
+        height: 600px;
+    }
+
+    .content .introdece {
+        width: 100%;
+        left: 0;
+        padding: 30px;
+    }
+
+    .content:hover img {
+        top: 70%;
+        left: 50%;
+        height: 300px;
+    }
+}
+
+@media (max-width:420px) {
+    .content .introdece {
+        padding: 20px;
+    }
+}
