@@ -1,0 +1,103 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.content {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* 渐变 -- 45度 */
+    background: linear-gradient(45deg, #08001f, #30197d);
+    color: #fff;
+
+}
+
+
+.content .container {
+    /* 使container -- 垂直居中 */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 180px;
+}
+
+/* 在container前添加方块 */
+.content .container::before {
+    content: '';
+    width: 180px;
+    height: 180px;
+    background-color: #f41b75;
+    border-radius: 5px;
+    /* 方块位于container左上角 -- 出container 左边50px 上方50px */
+    position: absolute;
+    left: -50px;
+    top: -50px;
+    /* 使方块位于container下方 */
+    z-index: -1;
+}
+
+/* 在container后添加圆 */
+.content .container::after {
+    content: '';
+    width: 180px;
+    height: 180px;
+    background-color: #419aff;
+    border-radius: 50%;
+    /* 圆位于于container -- 右下角 -- 出container 右方30px 下方50px*/
+    position: absolute;
+    right: -30px;
+    bottom: -50px;
+    /* 使圆位于container下方 */
+    z-index: -1;
+}
+
+/* 存放时间 */
+.container .clock {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(235, 0, 255, .11);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* backdrop-filter --  为一个元素后面区域添加图形效果（如模糊或颜色偏移）
+    它适用于元素背后的所有元素，为了看到效果，必须使元素或其背景至少部分透明*/
+    backdrop-filter: blur(40px);
+}
+
+/* 存放每个时间元素 */
+.container .clock span {
+    font-size: 80px;
+    width: 110px;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+
+/* 在时间下方添加文字描述 */
+.container .clock span::after {
+    content: '';
+    font-size: 16px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 不同的时间下方添加不同的时间描述 */
+#hrs::after {
+    content: 'HOURS';
+}
+
+#min::after {
+    content: 'MINS';
+}
+
+#sec::after {
+    content: 'SEC';
+}
